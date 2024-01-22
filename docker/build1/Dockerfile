@@ -1,4 +1,8 @@
-FROM ubuntu:latest
-LABEL authors="os2ma"
+FROM alpine:latest
+MAINTAINER "osman@osman.com"
+WORKDIR /mytext
+COPY ./my.txt build1.txt
 
-ENTRYPOINT ["top", "-b"]
+RUN apk add redis
+
+ENTRYPOINT ["redis-server"]
