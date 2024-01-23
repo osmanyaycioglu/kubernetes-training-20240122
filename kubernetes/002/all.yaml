@@ -13,3 +13,18 @@ spec:
       imagePullPolicy: IfNotPresent
   dnsPolicy: ClusterFirst
   restartPolicy: Always
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-nginx
+  labels:
+    myapp: our-nginx
+    ortak: osman
+  namespace: default
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      imagePullPolicy: IfNotPresent
+  restartPolicy: Always

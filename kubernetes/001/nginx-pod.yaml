@@ -4,10 +4,11 @@ metadata:
   name: my-nginx
   labels:
     myapp: our-nginx
+    ortak: osman
   namespace: default
 spec:
   containers:
-    - name: Title
+    - name: nginx
       image: nginx
       imagePullPolicy: IfNotPresent
   restartPolicy: Always
