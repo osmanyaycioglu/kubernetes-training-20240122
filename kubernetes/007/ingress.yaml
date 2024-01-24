@@ -1,19 +1,33 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: Title
+  name: tc-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /api/$2
 spec:
   ingressClassName: nginx
   rules:
     - http:
         paths:
-          - path: /api
+          - path: /tonode/api(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: ng-debug-service-node
+                port:
+                  number: 8080
+          - path: /tolb/api(/|$)(.*)
             pathType: Prefix
             backend:
               service:
-                name: ServiceTitle
+                name: ng-debug-service-lb
                 port:
-                  number: 80
-                
+                  number: 8080
+          - path: /tosvc/api(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: ng-debug-service
+                port:
+                  number: 8080
