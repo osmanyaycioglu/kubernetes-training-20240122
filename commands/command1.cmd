@@ -58,3 +58,10 @@ kubectl rollout history deployment nginx-dep
 kubectl rollout history deployment nginx-dep --revision=1
 kubectl rollout undo deployment nginx-dep
 kubectl rollout undo deployment nginx-dep --to-revision=1
+
+kubectl get services
+kubectl get services -o wide
+kubectl describe service ng-debug-service
+kubectl get endpoints
+kubectl get ep
+

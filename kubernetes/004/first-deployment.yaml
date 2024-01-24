@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ng-debug
+  labels:
+    app: ng-debug
+spec:
+  replicas: 3
+  revisionHistoryLimit: 4
+  selector:
+    matchLabels:
+      app: ng-debug
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      name: ng-debug
+      labels:
+        app: ng-debug
+    spec:
+      containers:
+        - name: ng-debug
+          image: osmanyay/ng-debug:v1.0.0
+          ports:
+            - containerPort: 80
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
