@@ -6,9 +6,15 @@ metadata:
     app: nginx-dep
 spec:
   replicas: 3
+  revisionHistoryLimit: 4
   selector:
     matchLabels:
       app: nginx-dep
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   template:
     metadata:
       name: nginx-dep
@@ -17,7 +23,7 @@ spec:
     spec:
       containers:
         - name: nginx-dep
-          image: nginx:latest
+          image: nginx:1.24-alpine
           ports:
             - containerPort: 80
           imagePullPolicy: IfNotPresent
